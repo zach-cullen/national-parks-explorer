@@ -1,6 +1,4 @@
-require 'dotenv'
+require 'dotenv/load'
 require 'pry'
 require 'rest-client'
 require 'json'
-
-got_env = "got environment"
