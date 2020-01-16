@@ -1,5 +1,5 @@
 class CLI
-  attr_accessor :current_state 
+  attr_accessor :current_state_code
   
   def start
     system('clear') # clears terminal
@@ -26,8 +26,28 @@ class CLI
       main_menu
     elsif user_input.downcase == "exit"
       goodbye
-    else user_input 
+    elsif represents_a_state?(user_input)
       load_and_list_parks
+      main_menu
+    else 
+      puts "Sorry, that is not a valid entry. Please follow the instructions below:"
+      main_menu
+    end
+  end
+
+  def represents_a_state?(string)
+    combined = ALL_STATES.concat(ALL_TERRITORIES)
+    combined_names = combined.map {|state| state[:name]}
+    combined_codes = combined.map {|state| state[:code]}
+    
+    if combined_names.include?(string.split(" ").each{|str| str.capitalize!}.join(" "))
+      @current_state = ALL_STATES.find {|state| state[:name] == string.split(" ").each{|str| str.capitalize!}.join(" ")}[:code]
+      return true
+    elsif combined_codes.include?(string.upcase)
+      @current_state = string.upcase 
+      return true
+    else
+      return false
     end
   end
 
@@ -41,5 +61,9 @@ class CLI
     ALL_STATES.each {|state| puts "#{state[:code]} - #{state[:name]}"}
     puts "\nTERRITORIES: "
     ALL_TERRITORIES.each {|terr| puts "#{terr[:code]} - #{terr[:name]}"}
+  end
+
+  def goodbye
+    puts "Thank you for using National Parks Explorer. Goodbye!"
   end
 end
