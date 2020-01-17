@@ -3,16 +3,16 @@ class NPExplorer::CLI
 
   def start
     system('clear') # clears terminal
-
+    print_welcome_screen
     puts "Welcome to National Parks Explorer!"
     NPExplorer::State.create_all_states
     main_menu
   end 
 
   def main_menu
-    puts "\nEnter the name of a US state or territory or its state code to see a list of national parks in that state."
-    puts "To see a list of states and territories and their codes enter 'states'"
-    puts "To exit this program, enter 'exit'"
+    puts "\n'states' - see a list of states and territories"
+    puts "'exit' - exit this program"
+    puts "\nEnter a the name of a STATE or territory or its state code to explore parks in that state:"
     
     main_menu_input
   end
@@ -45,10 +45,12 @@ class NPExplorer::CLI
 
 
   def sub_menu_parks
-    puts "\nEnter a number from list above to get information on a specific park"
-    puts "Enter 'tour' for descriptions of all #{@current_state.name} national parks"
-    puts "To return to main menu enter 'main'"
-    puts "To exit this program, enter 'exit'"
+    puts "\n"
+    puts "Enter a NUMBER from list above to get information on a specific park\n"
+    puts "Enter 'tour' To see descriptions of all national parks in #{@current_state.name}"
+    puts "Explore another STATE by entering it's name"
+    puts "'states' - see a list of states and territories"
+    puts "'exit' - exit this program"
 
     sub_menu_parks_input
   end
@@ -68,12 +70,25 @@ class NPExplorer::CLI
         sleep(0.01)
       end 
       sub_menu_parks
-    elsif user_input == "main"
-      main_menu
-    elsif user_input == "exit"
+    elsif user_input.downcase == "exit"
       goodbye
-    else
-      puts "Sorry that is an invalid entry, follow the instructions below:"
+    elsif user_input.downcase == "states"
+      list_states_and_territories
+      main_menu
+    elsif is_a_state_code?(user_input)
+      reformatted = user_input.upcase #turns ny or Ny into NY
+      @current_state = NPExplorer::State.find_state_by_code(reformatted)
+      load_parks_by_state(@current_state) if @current_state.parks.length == 0
+      list_parks_in_state(@current_state)
+      sub_menu_parks
+    elsif is_a_state_name?(user_input)
+      reformatted = user_input.split(" ").each{|str| str.capitalize!}.join(" ") #turns new york or New york into New York
+      @current_state = NPExplorer::State.find_state_by_name(reformatted)
+      load_parks_by_state(@current_state) if @current_state.parks.length == 0
+      list_parks_in_state(@current_state)
+      sub_menu_parks
+    else 
+      puts "Sorry, that is not a valid entry. Please follow the instructions below:"
       sub_menu_parks
     end
   end
@@ -108,5 +123,10 @@ class NPExplorer::CLI
 
   def goodbye
     puts "Thank you for using National Parks Explorer. Goodbye!"
+  end
+
+  def print_welcome_screen
+    WELCOME_SCREEN.each{|str| puts str}
+    puts "\n\n"
   end
 end

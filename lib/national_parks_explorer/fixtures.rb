@@ -54,9 +54,20 @@ ALL_STATES = [
   {:name => "American Samoa", :code => "AS"},
   {:name => "Federated States of Micronesia", :code => "FM"},
   {:name => "Guam", :code => "GU"},
-  {:name => "Marshall Islands", :code => "MH"},
   {:name => "Northern Mariana Islands", :code => "MP"},
-  {:name => "Palau", :code => "PW"},
   {:name => "Puerto Rico", :code => "PR"},
   {:name => "Virgin Islands", :code => "VI"}
+]
+
+WELCOME_SCREEN = [             
+'      ********                        ',
+'  **   ******   **       NATIONAL     ',
+'  ****************       PARKS        ',
+'  ****************       EXPLORER     ',
+'  ****************                 *  ',
+'   **************            *        ',
+'    ************      *               ',
+'     **********             ___     * ',
+'       ******              /\  \      ',
+'         **           ~~~~~~~~~~~~~~  '
 ]
