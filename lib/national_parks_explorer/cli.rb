@@ -22,19 +22,19 @@ class NPExplorer::CLI
 
     if user_input.downcase == "states"
       list_states_and_territories
-      puts "\n"
       main_menu
     elsif user_input.downcase == "exit"
       goodbye
     elsif is_a_state_code?(user_input)
       reformatted = user_input.upcase #turns ny or Ny into NY
       @current_state = NPExplorer::State.find_state_by_code(reformatted)
-      load_parks_by_state(@current_state)
+      load_parks_by_state(@current_state) if @current_state.parks.length == 0
       list_parks_in_state(@current_state)
       sub_menu_parks
     elsif is_a_state_name?(user_input)
       reformatted = user_input.split(" ").each{|str| str.capitalize!}.join(" ") #turns new york or New york into New York
       @current_state = NPExplorer::State.find_state_by_name(reformatted)
+      load_parks_by_state(@current_state) if @current_state.parks.length == 0
       load_parks_by_state(@current_state)
       list_parks_in_state(@current_state)
       sub_menu_parks
@@ -91,16 +91,8 @@ class NPExplorer::CLI
     NPExplorer::State.all_state_names.include?(reformatted)
   end
 
-  # def self.find_state_by_code(state_code)
-  #   NPExplorer::State.all.find {|state| state.code == state_code}
-  # end
-
-  # def self.find_state_by_name(state_name)
-  #   NPExplorer::State.all.find {|state| state.name == state_name}
-  # end
-
   def load_parks_by_state(state)
-    puts "Looking up parks in #{state.name}...\n\n"
+    puts "Looking up National Parks in #{state.name}...\n\n"
     NPExplorer::APIAdapter.make_parks_from_data(state.code)
   end
 
@@ -110,8 +102,8 @@ class NPExplorer::CLI
   end
 
   def list_states_and_territories
-    puts "\nSTATES: "
-    ALL_STATES.each {|state| puts "#{state[:code]} - #{state[:name]}"}
+    puts "\nStates & Territories: "
+    NPExplorer::State.all.each {|state| puts "#{state.code} - #{state.name}"}
   end
 
   def goodbye
