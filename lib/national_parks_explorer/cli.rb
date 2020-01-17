@@ -1,14 +1,11 @@
-class NationalParksExplorer::CLI
-  attr_accessor :current_state_code
+class NPExplorer::CLI
+  attr_accessor :current_state
   
   def start
     system('clear') # clears terminal
 
     puts "Welcome to National Parks Explorer! \n\n"
-
-    puts "Loading NPS data..."
-    NationalParksExplorer::APIAdapter.load_parks_by_state
-
+    NPExplorer::APIAdapter.create_all_states
     main_menu
   end 
 
@@ -56,7 +53,7 @@ class NationalParksExplorer::CLI
 
   def load_and_list_parks
     puts "Looking up parks in #{@current_state}..."
-    APIAdapter.list_parks(APIAdapter.get_parks_by_state(@current_state), @current_state)
+    NPExplorer::APIAdapter.list_parks(NPExplorer::APIAdapter.make_parks_from_data(@current_state), @current_state)
   end
 
   def list_states_and_territories
