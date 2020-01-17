@@ -1,4 +1,4 @@
-class NationalParksExplorer::State
+class NPExplorer::State
   attr_reader :name, :code, :parks
 
   @@all = []
