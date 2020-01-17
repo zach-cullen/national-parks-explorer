@@ -1,9 +1,13 @@
-class CLI
+class NationalParksExplorer::CLI
   attr_accessor :current_state_code
   
   def start
     system('clear') # clears terminal
+
     puts "Welcome to National Parks Explorer! \n\n"
+
+    puts "Loading NPS data..."
+    NationalParksExplorer::APIAdapter.load_parks_by_state
 
     main_menu
   end 
@@ -36,14 +40,13 @@ class CLI
   end
 
   def represents_a_state?(string)
-    combined = ALL_STATES.concat(ALL_TERRITORIES)
-    combined_names = combined.map {|state| state[:name]}
-    combined_codes = combined.map {|state| state[:code]}
+    state_names = ALL_STATES.map {|state| state[:name]}
+    state_codes = ALL_STATES.map {|state| state[:code]}
     
-    if combined_names.include?(string.split(" ").each{|str| str.capitalize!}.join(" "))
+    if state_names.include?(string.split(" ").each{|str| str.capitalize!}.join(" "))
       @current_state = ALL_STATES.find {|state| state[:name] == string.split(" ").each{|str| str.capitalize!}.join(" ")}[:code]
       return true
-    elsif combined_codes.include?(string.upcase)
+    elsif state_codes.include?(string.upcase)
       @current_state = string.upcase 
       return true
     else

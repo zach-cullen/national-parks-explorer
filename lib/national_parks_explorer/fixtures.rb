@@ -49,10 +49,7 @@ ALL_STATES = [
   {:name => "Washington", :code => "WA"},
   {:name => "West Virginia", :code => "WV"},
   {:name => "Wisconsin", :code => "WI"},
-  {:name => "Wyoming", :code => "WY"}
-]
-
-ALL_TERRITORIES = [
+  {:name => "Wyoming", :code => "WY"},
   {:name => "District of Columbia", :code => "DC"},
   {:name => "American Samoa", :code => "AS"},
   {:name => "Federated States of Micronesia", :code => "FM"},
