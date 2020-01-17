@@ -10,8 +10,8 @@ class NPExplorer::CLI
   end 
 
   def main_menu
-    puts "\n'states' - see a list of states and territories"
-    puts "'exit' - exit this program"
+    puts "\n'states' - See a list of states and territories"
+    puts "'exit' - Exit this program"
     puts "\nEnter a the name of a STATE or territory or its state code to explore parks in that state:"
     
     main_menu_input
@@ -46,11 +46,11 @@ class NPExplorer::CLI
 
   def sub_menu_parks
     puts "\n"
-    puts "Enter a NUMBER from list above to get information on a specific park\n"
-    puts "Enter 'tour' To see descriptions of all national parks in #{@current_state.name}"
+    puts "Enter a NUMBER from the list above for detailed information on a specific park\n"
     puts "Explore another STATE by entering it's name"
-    puts "'states' - see a list of states and territories"
-    puts "'exit' - exit this program"
+    puts "'tour' - See descriptions of all national parks in #{@current_state.name}"
+    puts "'states' - See a list of states and territories"
+    puts "'exit' - Exit this program"
 
     sub_menu_parks_input
   end
@@ -60,9 +60,8 @@ class NPExplorer::CLI
 
     if user_input.to_i > 0 && user_input.to_i <= @current_state.parks.length
       park = @current_state.parks[user_input.to_i - 1]
-      puts "\n#{park.name}"
-      puts "\n#{park.description}"
-      sub_menu_parks
+      display_park_information(park)
+      sub_menu_parks #change to detailed_menu
     elsif user_input.downcase == "tour"
       @current_state.parks.each.with_index(1) do |park, index|
         puts "\n#{index}. #{park.name}"
@@ -119,6 +118,16 @@ class NPExplorer::CLI
   def list_states_and_territories
     puts "\nStates & Territories: "
     NPExplorer::State.all.each {|state| puts "#{state.code} - #{state.name}" ; sleep(0.02)}
+  end
+
+  def display_park_information(park)
+    puts "\n#{park.name}\n"
+    puts "\nDescription:\n"
+    puts "#{park.description}"
+    puts "\nWeather Info:\n"
+    puts "#{park.weather}"
+    puts "\nCampgrounds: #\n"
+    puts "\nVisitor Center:\n"
   end
 
   def goodbye

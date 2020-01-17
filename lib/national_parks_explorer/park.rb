@@ -1,12 +1,13 @@
 class NPExplorer::Park
-  attr_accessor :name, :park_code, :states, :description
+  attr_accessor :name, :park_code, :states, :description, :weather, :visitor_center, :campgrounds
 
   @@all = []
 
-  def initialize(name:, park_code:, state_code_array:, description:)
+  def initialize(name:, park_code:, state_code_array:, description:, weather:)
     @name = name
     @park_code = park_code
     @description = description
+    @weather = weather
     @states = []
     state_code_array.split(',').each {|code| @states << NPExplorer::State.find_state_by_code(code)}
     @states.each {|state| self.save_to_state(state)}
