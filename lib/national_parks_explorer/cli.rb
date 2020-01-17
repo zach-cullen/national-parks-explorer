@@ -35,7 +35,6 @@ class NPExplorer::CLI
       reformatted = user_input.split(" ").each{|str| str.capitalize!}.join(" ") #turns new york or New york into New York
       @current_state = NPExplorer::State.find_state_by_name(reformatted)
       load_parks_by_state(@current_state) if @current_state.parks.length == 0
-      load_parks_by_state(@current_state)
       list_parks_in_state(@current_state)
       sub_menu_parks
     else 
@@ -65,7 +64,8 @@ class NPExplorer::CLI
     elsif user_input.downcase == "tour"
       @current_state.parks.each.with_index(1) do |park, index|
         puts "\n#{index}. #{park.name}"
-        puts "\n#{park.description}"
+        puts "\n#{park.description}\n\n"
+        sleep(0.01)
       end 
       sub_menu_parks
     elsif user_input == "main"
@@ -103,7 +103,7 @@ class NPExplorer::CLI
 
   def list_states_and_territories
     puts "\nStates & Territories: "
-    NPExplorer::State.all.each {|state| puts "#{state.code} - #{state.name}"}
+    NPExplorer::State.all.each {|state| puts "#{state.code} - #{state.name}" ; sleep(0.02)}
   end
 
   def goodbye
