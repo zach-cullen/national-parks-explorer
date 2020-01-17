@@ -1,5 +1,6 @@
 class NPExplorer::State
-  attr_reader :name, :code, :parks
+  attr_accessor :parks
+  attr_reader :name, :code
 
   @@all = []
 
@@ -16,6 +17,14 @@ class NPExplorer::State
 
   def self.all
     @@all
+  end
+
+  def self.all_state_codes
+    self.all.map {|state| state.code}
+  end
+
+  def self.all_state_names
+    self.all.map {|state| state.name}
   end
 
 end
