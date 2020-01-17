@@ -4,11 +4,11 @@ class NPExplorer::APIAdapter
   BASE_URL = "https://developer.nps.gov/api/v1/" 
 
   #uses hard-coded list of states and territories to create state objects
-  def self.create_all_states
-    ALL_STATES.each do |state| 
-      NPExplorer::State.new(state[:name], state[:code])
-    end
-  end
+  # def self.create_all_states
+  #   ALL_STATES.each do |state| 
+  #     NPExplorer::State.new(state[:name], state[:code])
+  #   end
+  # end
 
   #gets data about parks from the api one state at a time and returns a hash
   def self.get_parks_by_state(state_code)

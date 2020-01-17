@@ -5,7 +5,7 @@ class NPExplorer::CLI
     system('clear') # clears terminal
 
     puts "Welcome to National Parks Explorer!"
-    NPExplorer::APIAdapter.create_all_states
+    NPExplorer::State.create_all_states
     main_menu
   end 
 
@@ -15,15 +15,6 @@ class NPExplorer::CLI
     puts "To exit this program, enter 'exit'"
     
     main_menu_input
-  end
-
-  def sub_menu_parks
-    puts "\nEnter a number from list above to get information on a specific park"
-    puts "Enter 'tour' for descriptions of all #{@current_state.name} national parks"
-    puts "To return to main menu enter 'main'"
-    puts "To exit this program, enter 'exit'"
-
-    sub_menu_parks_input
   end
 
   def main_menu_input
@@ -37,13 +28,13 @@ class NPExplorer::CLI
       goodbye
     elsif is_a_state_code?(user_input)
       reformatted = user_input.upcase #turns ny or Ny into NY
-      @current_state = self.class.find_state_by_code(reformatted)
+      @current_state = NPExplorer::State.find_state_by_code(reformatted)
       load_parks_by_state(@current_state)
       list_parks_in_state(@current_state)
       sub_menu_parks
     elsif is_a_state_name?(user_input)
       reformatted = user_input.split(" ").each{|str| str.capitalize!}.join(" ") #turns new york or New york into New York
-      @current_state = self.class.find_state_by_name(reformatted)
+      @current_state = NPExplorer::State.find_state_by_name(reformatted)
       load_parks_by_state(@current_state)
       list_parks_in_state(@current_state)
       sub_menu_parks
@@ -51,6 +42,16 @@ class NPExplorer::CLI
       puts "Sorry, that is not a valid entry. Please follow the instructions below:"
       main_menu
     end
+  end
+
+
+  def sub_menu_parks
+    puts "\nEnter a number from list above to get information on a specific park"
+    puts "Enter 'tour' for descriptions of all #{@current_state.name} national parks"
+    puts "To return to main menu enter 'main'"
+    puts "To exit this program, enter 'exit'"
+
+    sub_menu_parks_input
   end
 
   def sub_menu_parks_input
@@ -90,13 +91,13 @@ class NPExplorer::CLI
     NPExplorer::State.all_state_names.include?(reformatted)
   end
 
-  def self.find_state_by_code(state_code)
-    NPExplorer::State.all.find {|state| state.code == state_code}
-  end
+  # def self.find_state_by_code(state_code)
+  #   NPExplorer::State.all.find {|state| state.code == state_code}
+  # end
 
-  def self.find_state_by_name(state_name)
-    NPExplorer::State.all.find {|state| state.name == state_name}
-  end
+  # def self.find_state_by_name(state_name)
+  #   NPExplorer::State.all.find {|state| state.name == state_name}
+  # end
 
   def load_parks_by_state(state)
     puts "Looking up parks in #{state.name}...\n\n"

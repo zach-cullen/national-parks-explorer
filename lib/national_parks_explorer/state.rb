@@ -27,4 +27,19 @@ class NPExplorer::State
     self.all.map {|state| state.name}
   end
 
+  def self.find_state_by_code(state_code)
+    self.all.find {|state| state.code == state_code}
+  end
+
+  def self.find_state_by_name(state_name)
+    self.all.find {|state| state.name == state_name}
+  end
+
+  #uses hard-coded list of states and territories to create state objects
+  def self.create_all_states
+    ALL_STATES.each do |state| 
+      self.new(state[:name], state[:code])
+    end
+  end
+
 end

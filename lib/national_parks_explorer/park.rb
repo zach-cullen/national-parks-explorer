@@ -8,7 +8,7 @@ class NPExplorer::Park
     @park_code = park_code
     @description = description
     @states = []
-    state_code_array.split(',').each {|code| @states << NPExplorer::CLI.find_state_by_code(code)}
+    state_code_array.split(',').each {|code| @states << NPExplorer::State.find_state_by_code(code)}
     @states.each {|state| self.save_to_state(state)}
     self.save
   end
