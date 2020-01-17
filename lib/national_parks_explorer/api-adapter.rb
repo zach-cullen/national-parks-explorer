@@ -22,15 +22,8 @@ class NPExplorer::APIAdapter
 
     park_info = get_parks_by_state(state_code)
     park_info.each do |park|
-      NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], states: park["states"], description: park["description"] )
+      NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], state_code_array: park["states"], description: park["description"] )
     end
-
-    binding.pry #check to see if there are parks
-  end
-
-  def self.list_parks(array, state_code)
-    puts "Here are all of the national parks in #{state_code}:"
-    array.each.with_index(1) {|park, index| puts "#{index}. #{park["fullName"]}"}
   end
 
   # UNUSED - loads all 674 parks one state at a time
