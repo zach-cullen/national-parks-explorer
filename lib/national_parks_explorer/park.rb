@@ -1,11 +1,22 @@
-class NationalParksExplorer::Park
-  attr_accessor :name, :states, :description, :weather
+class NPExplorer::Park
+  attr_accessor :name, :park_code, :states, :description
 
-  def initialize(name, states, description, weather)
+  @@all = []
+
+  def initialize(name:, park_code:, states:, description:)
     @name = name
-    @states = []
+    @park_code = park_code
+    @states = states
     @description = description
-    @weather = weather
+    self.save
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.all
+    @@all
   end
 
 end
