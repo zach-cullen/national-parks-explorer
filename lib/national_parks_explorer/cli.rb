@@ -46,9 +46,9 @@ class NPExplorer::CLI
 
   def sub_menu_parks
     puts "\n"
-    puts "Enter a NUMBER from the list above for detailed information on a specific park\n"
-    puts "Explore another STATE by entering it's name"
+    puts "'list' - to go back to the list of parks in #{@current_state.name}\n"
     puts "'tour' - See descriptions of all national parks in #{@current_state.name}"
+    puts "Explore another STATE by entering it's name or state code"
     puts "'states' - See a list of states and territories"
     puts "'exit' - Exit this program"
 
@@ -68,6 +68,9 @@ class NPExplorer::CLI
         puts "\n#{park.description}\n\n"
         sleep(0.01)
       end 
+      sub_menu_parks
+    elsif user_input.downcase == "list"
+      list_parks_in_state(@current_state)
       sub_menu_parks
     elsif user_input.downcase == "exit"
       goodbye
@@ -124,10 +127,10 @@ class NPExplorer::CLI
     puts "\n#{park.name}\n"
     puts "\nDescription:\n"
     puts "#{park.description}"
+    puts "\nLocation:\n"
+    puts "#{park.location}"
     puts "\nWeather Info:\n"
     puts "#{park.weather}"
-    puts "\nCampgrounds: #\n"
-    puts "\nVisitor Center:\n"
   end
 
   def goodbye
