@@ -15,6 +15,10 @@ class NPExplorer::State
     @@all << self
   end
 
+  def parks
+    NPExplorer::Park.all.select {|park| park.states.include?(self)}
+  end
+
   def self.all
     @@all
   end
