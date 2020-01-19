@@ -22,7 +22,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Enter below into terminal and follow the prompts on screen. 
+
+    $ ./bin/run_national_parks_explorer
 
 ## Development
 
