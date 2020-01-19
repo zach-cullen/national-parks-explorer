@@ -12,7 +12,7 @@ class NPExplorer::CLI
   def main_menu
     puts "\n'states' - See a list of states and territories"
     puts "'exit' - Exit this program"
-    puts "\nEnter a the name of a STATE or territory or its state code to explore parks in that state:"
+    puts "Enter a STATE name or code to see a list of parks in that state or territory"
     
     main_menu_input
   end
@@ -58,7 +58,7 @@ class NPExplorer::CLI
   def sub_menu_park_details
     puts "\n"
     puts "'list' - to go back to the list of parks in #{@current_state.name}\n"
-    puts "Explore another STATE by entering it's name or state code"
+    puts "Enter a STATE name or code to see a list of parks in that state"
     puts "'states' - See a list of states and territories"
     puts "'exit' - Exit this program"
 
