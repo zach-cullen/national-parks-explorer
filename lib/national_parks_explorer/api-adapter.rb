@@ -15,7 +15,7 @@ class NPExplorer::APIAdapter
 
     park_info = get_parks_by_state(state_code)
     park_info.each do |park|
-      NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], state_code_array: park["states"], description: park["description"], weather: park["weatherInfo"])
+      NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], state_code_array: park["states"], description: park["description"], location: park["directionsInfo"], weather: park["weatherInfo"])
     end
   end
 
