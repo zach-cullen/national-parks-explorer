@@ -20,10 +20,6 @@ class NPExplorer::Park
     @@all << self
   end
 
-  # def save_to_state(state)
-  #   state.parks << self
-  # end
-
   def self.all
     @@all
   end
