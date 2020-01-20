@@ -11,8 +11,8 @@ class NPExplorer::CLI
 
   def main_menu
     puts "\nEnter a STATE name or code to see a list of parks in that state or territory (e.g. 'Alaska' or 'AK')"
-    puts "'states' - See a list of states and territories"
-    puts "'exit' - Exit this program"
+    puts "'STATES' - See a list of states and territories"
+    puts "'EXIT' - Exit this program"
 
     
     main_menu_input
@@ -46,7 +46,7 @@ class NPExplorer::CLI
 
 
   def sub_menu_parks
-    puts "\n"
+    puts "\n\n"
     puts "Enter the NUMBER of a park above for more information"
     puts "Enter a STATE NAME or code to see a list of National Parks in that state"
     puts "'TOUR' - See descriptions of all national parks in #{@current_state.name}"
@@ -57,7 +57,7 @@ class NPExplorer::CLI
   end
 
   def sub_menu_park_details
-    puts "\n"
+    puts "\n\n"
     puts "Enter a STATE NAME or code to see a list of National Parks in that state"
     puts "'LIST' - to go back to the list of parks in #{@current_state.name}\n"
     puts "'STATES' - See a list of states and territories"
@@ -121,6 +121,7 @@ class NPExplorer::CLI
   end
 
   def list_parks_in_state(state)
+    system('clear')
     puts "National Parks in #{state.name}:"
     state.parks.each.with_index(1) {|park, index| puts "#{index}. #{park.name}"}
   end
@@ -139,6 +140,7 @@ class NPExplorer::CLI
   end
 
   def display_park_information(park)
+    system('clear')
     puts "\n#{park.name.upcase}\n"
     puts "\nDescription:\n"
     puts "#{park.description}"
