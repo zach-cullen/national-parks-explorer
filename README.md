@@ -28,7 +28,7 @@ Once you have added your API key:
 
 Enter below into terminal and follow the prompts on screen. 
 
-    $ ./bin/run_npexplorer
+    $ ./bin/national_parks_explorer
 
 ## Development
 
