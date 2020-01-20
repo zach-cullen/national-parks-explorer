@@ -1,5 +1,5 @@
 class NPExplorer::CLI
-  attr_accessor :current_state, :current_park
+  attr_accessor :current_state,
 
   def start
     system('clear') # clears terminal
