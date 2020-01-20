@@ -3,6 +3,7 @@ class NPExplorer::CLI
 
   def start
     system('clear') # clears terminal
+    puts "\n"
     print_welcome_screen
     puts "Welcome to National Parks Explorer!"
     NPExplorer::State.create_all_states
@@ -102,9 +103,6 @@ class NPExplorer::CLI
     end
   end
 
-
-
-
   def is_a_state_code?(string)
     reformatted = string.upcase #turns ny or Ny into NY
     NPExplorer::State.all_state_codes.include?(reformatted)
@@ -142,10 +140,11 @@ class NPExplorer::CLI
   def display_park_information(park)
     system('clear')
     puts "\n#{park.name.upcase}\n"
+    puts "Designation: #{park.designation}"
     puts "\nDescription:\n"
     puts "#{park.description}"
-    puts "\nLocation:\n"
-    puts "#{park.location}"
+    puts "\nDirections:\n"
+    puts "#{park.directions}"
     puts "\nWeather Info:\n"
     puts "#{park.weather}"
   end

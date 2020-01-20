@@ -11,21 +11,9 @@ class NPExplorer::APIAdapter
   
   #creates all park objects for a particular state
   def self.make_parks_from_data(state_code)
-    #needs to check if data is already there
-
     park_info = get_parks_by_state(state_code)
     park_info.each do |park|
-      NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], state_code_array: park["states"], description: park["description"], location: park["directionsInfo"], weather: park["weatherInfo"])
-    end
-  end
-
-  # UNUSED - loads all 674 parks one state at a time
-  def self.load_parks_by_state
-    NPExplorer::State.all.each do |state|
-      park_info = get_parks_by_state(state.code)
-      park_info.each do |park|
-        NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], states: park["states"], description: park["description"] )
-      end
+      NPExplorer::Park.new(name: park["fullName"], park_code: park["parkCode"], state_code_array: park["states"], description: park["description"], directions: park["directionsInfo"], weather: park["weatherInfo"], designation: park["designation"])
     end
   end
 
