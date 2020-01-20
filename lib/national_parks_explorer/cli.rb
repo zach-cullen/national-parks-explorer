@@ -150,7 +150,15 @@ class NPExplorer::CLI
   end
 
   def goodbye
-    puts "Thank you for using National Parks Explorer. Goodbye!"
+    system('clear')
+    puts "Thank you for using National Parks Explorer. Goodbye!\n\n"
+    print_goodbye_screen
+
+  end
+
+  def print_goodbye_screen
+    GOODBYE_SCREEN.each{|str| puts str}
+    puts "\n\n"
   end
 
   def print_welcome_screen
