@@ -22,9 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
+You will need to acquire an API key from the NPS API at https://www.nps.gov/subjects/developer/get-started.htm, and assign it to a constant called NPS_API_KEY in a .env file. Hide that file using ruby gem 'dotenv'
+
+Once you have added your API key:
+
 Enter below into terminal and follow the prompts on screen. 
 
-    $ ./bin/run_national_parks_explorer
+    $ ./bin/run_npexplorer
 
 ## Development
 
