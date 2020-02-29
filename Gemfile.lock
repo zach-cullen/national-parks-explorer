@@ -25,7 +25,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     rainbow (1.99.2)
-    rake (12.3.2)
+    rake (13.0.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -55,7 +55,7 @@ DEPENDENCIES
   bundler (~> 2.0)
   national_parks_explorer!
   pry
-  rake (~> 12.0)
+  rake (~> 13.0)
   rest-client
   rspec (~> 3.0)
 
